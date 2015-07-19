@@ -27,9 +27,25 @@ hist(stepsPerDay, 25, col = "gray", main = "Histogram of the total number of ste
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
-The mean total number of steps taken per day is `{r}mean(stepsPerDay)`.
+The mean total number of steps taken per day is 
 
-The median total number of steps taken per day is `{r}median(stepsPerDay)`.
+```r
+mean(stepsPerDay)
+```
+
+```
+## [1] 10766.19
+```
+
+The median total number of steps taken per day is 
+
+```r
+median(stepsPerDay)
+```
+
+```
+## [1] 10765
+```
 
 
 ## What is the average daily activity pattern?
@@ -41,13 +57,29 @@ dailyPattern <- tapply(data$steps, data$interval, mean)
 plot(data$interval[1:length(dailyPattern)], dailyPattern, type="l", xlab="time interval", ylab="average daily activity per time interval", main="Time series plot for average daily activity per time interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
-The peak activity time interval contining the the maximum number of steps for daily average is '{r}names(which.max(dailyPattern))`.
+The peak activity time interval contining the the maximum number of steps for daily average is
+
+```r
+names(which.max(dailyPattern))
+```
+
+```
+## [1] "835"
+```
 
 ## Imputing missing values
 
-The total number of missing values can be computed using `complete.cases` function (as it was done above). Therefore, the number of incomplete observations is `{r}length(completeIndexes) - sum(completeIndexes)`.
+The total number of missing values can be computed using `complete.cases` function (as it was done above). Therefore, the number of incomplete observations is 
+
+```r
+length(completeIndexes) - sum(completeIndexes)
+```
+
+```
+## [1] 2304
+```
 
 Let's fill the missing data with an avarage daily activity for that interval.
 
@@ -67,11 +99,27 @@ stepsPerDay.new <- tapply(data.new$steps, data.new$date, sum)
 hist(stepsPerDay.new, 25, col = "gray", main = "Histogram of the total number of steps taken each day for the new dataset")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 
-The mean total number of steps taken per day for the new dataset is `{r}mean(stepsPerDay.new)`.
+The mean total number of steps taken per day for the new dataset is 
 
-The median total number of steps taken per day for the new dataset is `{r}median(stepsPerDay.new)`.
+```r
+mean(stepsPerDay.new)
+```
+
+```
+## [1] 10766.19
+```
+
+The median total number of steps taken per day for the new dataset is 
+
+```r
+median(stepsPerDay.new)
+```
+
+```
+## [1] 10766.19
+```
 
 Obviously, the statistical summary is different different for the new dataset with filled in missing data comapre to the original dataset with removed observations containing missing values. However, this particular strategy of filling in the missing data with the daily averages did not affect the avaerage number of steps for the whole day. If the strategy of filling in the missing data is different, then the effect might be more noticable. For example, filling in the missing data with 0 value brings the expected (average) number of steps per day down:
 
@@ -112,7 +160,7 @@ plot(data$interval[1:length(dailyPattern)], dailyPattern.weekday, type = "l", xl
 mtext("Time series plot for average daily activity per time interval", outer = TRUE)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
 
 Clearly, thre is a difference between weekdays and weekends pattern activity.
 
